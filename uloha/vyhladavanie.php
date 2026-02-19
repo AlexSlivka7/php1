@@ -1,30 +1,3 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<form method="post">
-    <fieldset>
-    <label for="Meno">Meno:</label>
-    <input type="text" name="Meno">
-    <br>
-    <label for="Priezvisko">Priezvisko:</label>
-    <input type="text" name="Priezvisko" >
-    <br>
-    <button type="submit" name="hladat">Hľadať</button>
-    </fieldset>
-</form>
-
-<a href="register.php">
-    <button type="button">Späť na registráciu</button>
-</a>
-<br>
-</body>
-</html>
 <?php
 if(isset($_POST["hladat"])) {
 
@@ -58,3 +31,30 @@ if(isset($_POST["hladat"])) {
 }
 /*print_r($udaje);*/
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form method="post">
+    <fieldset>
+    <label for="Meno">Meno:</label>
+    <input type="text" name="Meno">
+    <br>
+    <label for="Priezvisko">Priezvisko:</label>
+    <input type="text" name="Priezvisko" >
+    <br>
+    <button type="submit" name="hladat">Hľadať</button>
+    </fieldset>
+</form>
+
+<a href="register.php">
+    <button type="button">Späť na registráciu</button>
+</a>
+<br>
+</body>
+</html>
+
