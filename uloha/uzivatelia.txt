@@ -1,0 +1,6 @@
+Peter;Slivka;Muž;Stredná škola
+Adam;Mravec;Muž;Vysoká škola
+Eva;Kvetová;Žena;Stredná škola
+Lukáš;Mäkký;Žena;Základná škola
+Janko;Hraško;Žena;Vysoká škola
+Janko;Mrkvička;Muž;Základná škola
