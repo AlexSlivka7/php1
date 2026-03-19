@@ -1,0 +1,33 @@
+td, th, tr{
+    border: solid black 2px;
+    padding: 2px;
+    text-align: center;
+    font-size: 20px;
+}
+table{
+    border: black solid 3px;
+    margin-top: 5px;
+}
+
+input, select{
+    font-size: 20px;
+    border: solid black 2px;
+}
+body{
+    margin-left: 10px;
+}
+legend{
+    font-size: 25px;
+}
+.create{
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+}
+.btn-success{
+    margin-bottom: 7px;
+}
+div{
+    font-size: 30px;
+}
+

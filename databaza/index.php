@@ -54,6 +54,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["
 
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "info"){
+    
+    header("Location: info.php?id=" . $_POST["kniha_id"]);
+    exit();
+
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])&&($_POST["action"] === "switch")) {
+        
+    $sql = "UPDATE knihy 
+            SET stav = IF(stav = 1, 0, 1)
+            WHERE id = :id";
+
+    $stmt = $db->prepare($sql);
+
+    $stmt->execute([
+        ":id" => $_POST["id"]
+    ]);
+
+    
+     header("Location: index.php");
+     exit();
+}
+
 
 
 
@@ -77,15 +102,17 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabulka</title>
+    <title>Knižnica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
+    <link rel="stylesheet" href="style.css">
+</head>
 </head>
 <body>
     <h1>Knižnica</h1>
     <br>
-    <form action="index.php" method="post">
-        <fieldset <legend>Vloženie Knihy</legend><br>
+    <form class="create" action="index.php" method="post">
+        <fieldset>
+            <legend>Vloženie knihy</legend><br>
         
         <input type="hidden" name="action" value="create">
 
@@ -100,17 +127,17 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <option value="0">Požičaná</option>
         </select>
 
-        <button type="submit" class="btn btn-success">Pridať</button>
+        <button  type="submit" class="btn btn-success">Pridať</button>
         </fieldset>
     </form>
 
-    <table border ="1">
+    <table>
         <tr>
             <th>Nazov</th>
             <th>Autor</th>
             <th>Rok vydania</th>
             <th>Stav</th>
-            <th>Action</th>
+            <th colspan="3">Action</th>
         </tr>
 
             <?php foreach ($kniznica as $kniha):?>
@@ -124,15 +151,18 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 <td>
                     <?= $kniha->getRok_vydania();?>
                 </td>
-                <td>
-                    <?php
-                    if ($kniha->getStav() === 1) {
-                        echo "Dostupná";
-                    } else {
-                        echo "Požičaná";
-                    }
-                    ?>
-                    </td>
+               <td>
+                    <form method="POST">
+                        <input type="hidden" name="id" value="<?= $kniha->getId(); ?>">
+                        <input type="hidden" name="action" value="switch">
+
+                        <button type="submit" class="btn btn-secondary">
+                            <?= $kniha->getStav() === 1 ? "Dostupná" : "Požičaná"; ?>
+                        </button>
+                    </form>
+                </td>
+
+
                 <td>
                     <form action="index.php" method="POST">
                         <input type="hidden" name="action" value="delete">
@@ -140,11 +170,22 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
+
+
                 <td>
                      <form action="index.php" method="POST">
                         <input type="hidden" name="action" value="update">
                         <input type="hidden" name="kniha_id" value="<?= $kniha->getId(); ?>" >
                         <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </td>
+
+
+                  <td>
+                     <form action="index.php" method="POST">
+                        <input type="hidden" name="action" value="info">
+                        <input type="hidden" name="kniha_id" value="<?= $kniha->getId(); ?>" >
+                        <button type="submit" class="btn btn-warning">Info</button>
                     </form>
                 </td>
             </tr>
