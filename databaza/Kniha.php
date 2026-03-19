@@ -42,7 +42,7 @@ class Kniha{
 
 
     public function getId(){
-        return $this->$id;
+        return $this->id;
     }
 
     public function getNazov(){
