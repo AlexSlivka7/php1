@@ -4,3 +4,4 @@ Eva;Kvetová;Žena;Stredná škola
 Lukáš;Mäkký;Žena;Základná škola
 Janko;Hraško;Žena;Vysoká škola
 Janko;Mrkvička;Muž;Základná škola
+Rastislav;Slivka;Žena;Základná škola
