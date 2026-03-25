@@ -14,6 +14,8 @@ $sql = "SELECT * FROM knihy";
 
 $stmt = $db->query($sql);
 
+//delete (vymazanie knihy)
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "delete"){
 
     $sql = "DELETE FROM knihy WHERE id = :id";
@@ -27,6 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["
     header("Location: index.php");
     exit();
 }
+
+//create (vytvorenie novej knihy)
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "create"){
 
@@ -46,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["
     exit();
 }
 
+//update (uprava knihy)
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "update"){
     
@@ -54,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["
 
 }
 
+//info (zobrazenie info o knihe)
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "info"){
     
     header("Location: info.php?id=" . $_POST["kniha_id"]);
@@ -61,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["
 
 }
 
+// prepinac (pozicana alebo dostupna)
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])&&($_POST["action"] === "switch")) {
         
