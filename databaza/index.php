@@ -39,16 +39,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["
 
     $stmt = $db->prepare($sql);
 
-    $stmt->execute([
+    if (empty($_POST["nazov"]) || empty($_POST["autor"]) || empty($_POST["rok_vydania"])) {
+        header("Location: index.php?error");
+        exit();
+    }
+
+    $success = $stmt->execute([
         ":nazov" => $_POST["nazov"],
         ":autor" => $_POST["autor"],
         ":rok_vydania" => $_POST["rok_vydania"],
         ":stav" => $_POST["stav"]
     ]);
-
-    header("Location: index.php");
+    
+    if ($success) {
+        header("Location: index.php?success");
+        
+    } else {
+        header("Location: index.php?error");
+    }
     exit();
+    
 }
+
+//stav 
+
+$stav = ""; 
+
+if (isset($_GET["success"])) {
+    $stav = "Kniha bola pridaná";
+} elseif (isset($_GET["error"])) {
+    $stav = "Kniha sa nepridala";
+}
+
 
 //update (uprava knihy)
 
@@ -116,6 +138,15 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 </head>
 </head>
 <body>
+
+    <?php if (isset($_GET["success"])): ?>
+        <p class="alert alert-success"><?=$stav?></p>
+    <?php endif; ?>
+
+    <?php if (isset($_GET["error"])): ?>
+        <p class="alert alert-danger"><?=$stav?></p>
+    <?php endif; ?>
+
     <h1>Knižnica</h1>
     <br>
     <form class="create" action="index.php" method="post">

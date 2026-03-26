@@ -1,9 +1,9 @@
 <?php
 
 print_r($_GET);
-$cislo1 = $_GET["cislo1"];
-$cislo2 = $_GET["cislo2"];
-$operacia = $_GET["operacia"];
+$cislo1 = isset($_GET["cislo1"]);
+$cislo2 = isset($_GET["cislo2"]);
+$operacia = isset($_GET["operacia"]);
 echo "<br>";
 
 if ($operacia === "+") {
